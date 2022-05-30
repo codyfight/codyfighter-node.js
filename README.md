@@ -17,10 +17,10 @@ Basic Codyfight Bot with node.js
 4. Run a bot via command line
 > `npm run start`
 
-5. Deploy an instance on any cloud or local computer
-> e.g. Heroku
-
-6. Build your advanced algorithm and play against others online!
+5. Build your advanced algorithm and play against others online!
 > Read [API documentation](https://codyfight.com/api-doc)
 
-7. Scale Codfyighters farm!
+6. Deploy an instance on any cloud or local computer
+> e.g. [Heroku](https://www.heroku.com/)
+
+7. Scale Codyfighters farm!
