@@ -38,7 +38,7 @@ export default class CBot {
         // wait an opponent match
         while (this.game.state.status === GAME_STATUS_INIT) {
             this.game = await this.check(this.CKey);
-            console.log('++ Game state received');
+            console.log('++ Game state received', this.game.state);
         }
 
         // play the game
@@ -53,7 +53,7 @@ export default class CBot {
                 console.log('>> codyfighter move', x, y);
             } else {
                 this.game = await this.check(this.CKey);
-                console.log('++ game state received', this.game.state.status);
+                console.log('++ game state received', this.game.state);
             }
         }
 
