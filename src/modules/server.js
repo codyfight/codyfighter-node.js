@@ -11,4 +11,4 @@ export default function server(app) {
         const cbot = new CBot(app, app.config.api.codyfight.ckey);
         cbot.run();
     });
-}
+};
