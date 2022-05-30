@@ -33,7 +33,7 @@ export default class CBot {
     play = async () => {
         // initialize a new game
         this.game = await this.init(this.CKey, GAME_MODE, null);
-        console.log('^^ game initialized', this.game.operators.bearer.name ? this.game.operators.bearer.name: '');
+        console.log('^^ game initialized', this.game.state);
 
         // wait an opponent match
         while (this.game.state.status === GAME_STATUS_INIT) {
@@ -50,7 +50,7 @@ export default class CBot {
                 let y = this.game.operators.bearer.possible_moves[randomMove].y;
 
                 this.game = await this.move(this.CKey, x, y);
-                console.log('>> codyfighter move', x, y);
+                console.log('>> codyfighter moved', x, y, this.game.state);
             } else {
                 this.game = await this.check(this.CKey);
                 console.log('++ game state received', this.game.state);
