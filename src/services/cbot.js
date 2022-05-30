@@ -31,11 +31,9 @@ export default class CBot {
         // initialize a new game
         this.game = await this.init(CKEY, GAME_MODE, null);
 
-        console.log(this.game);
-
         // wait an opponent match
         while (this.game.state.status === GAME_STATUS_INITIALIZING) {
-            this.game = await check(CKEY);
+            this.game = await this.check(CKEY);
         }
 
         // play the game
@@ -46,9 +44,9 @@ export default class CBot {
                 let x = this.game.operators.bearer.possible_moves[randomMove].x;
                 let y = this.game.operators.bearer.possible_moves[randomMove].y;
 
-                this.game = await move(CKEY, x, y);
+                this.game = await this.move(CKEY, x, y);
             } else {
-                this.game = await check(CKEY);
+                this.game = await this.check(CKEY);
             }
         }
 
@@ -78,16 +76,11 @@ export default class CBot {
         };
     
         if (!(method === 'GET' || method === 'HEAD')) {
-            // config.data = JSON.stringify(params);
             config.data = params;
         }
     
         let response = await axios(config);
 
-        if (response.status !== 200) {
-            throw response;
-        }
-
-        return response;
+        return response.data;
     }
 };
