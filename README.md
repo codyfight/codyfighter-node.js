@@ -1,12 +1,26 @@
 # CBot
 ---
-Basic Codyfight Bot with node.js that can also be scaled
+Basic Codyfight Bot with node.js
 ---
 
 ## How to run?
 
-- Install `npm` (https://nodejs.org/en/download/)
-- Clone or fork this repository
-- Setup your Operator CKey in the `.env` file (_currently, only a limited amount CKeys are available for early access players_)
-- Deploy an instance on any cloud (e.g. Heroku) or local computer
-- Build your advanced algorithm that plays via [API](https://codyfight.com/api-doc) and beat others!
+1. Install npm
+> https://nodejs.org/en/download/
+
+2. Clone or fork this repository
+> `git@github.com:driule/codyfight-bot.git`
+
+3. Setup your Operator CKey in the `.env` file
+> _Currently, only a limited amount CKeys are available for early access players_
+
+4. Run a bot via command line
+> `npm run start`
+
+5. Deploy an instance on any cloud or local computer
+> e.g. Heroku
+
+6. Build your advanced algorithm that plays via and beat others!
+> Read [API documentation](https://codyfight.com/api-doc)
+
+7. Scale Codfyighters farm!
