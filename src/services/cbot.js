@@ -19,15 +19,16 @@ export default class CBot {
     }
 
     run = async () => {
-        try {
-            await this.play();
-        } catch (e) {
-            console.error(`#### game failure ####\n* re-laucnhing the game...`, e);
-            this.run();
-        }
 
-        console.log('* re-laucnhing the game...');
-        this.run();
+        do {
+            try {
+                console.log('* laucnhing the game...');
+                await this.play();
+            } catch (e) {
+                console.error(`#### game failure ####\n* re-laucnhing the game...`, e);
+                await this.run();
+            }
+        } while (true);
     };
 
     play = async () => {
