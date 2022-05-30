@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const CKEY = '***';
-const GAME_MODE = 2;
+const GAME_MODE = 2; // random player
 const API_URL = 'https://game.codyfight.com';
 
 const GAME_STATUS_ENDED = 2;
@@ -12,6 +11,8 @@ export default class CBot {
 
     constructor(app) {
         this.app = app;
+
+        this.CKey = this.app.config.api.codyfight.ckey;
         this.game = {};
     }
 
@@ -29,11 +30,11 @@ export default class CBot {
 
     play = async () => {
         // initialize a new game
-        this.game = await this.init(CKEY, GAME_MODE, null);
+        this.game = await this.init(this.CKey, GAME_MODE, null);
 
         // wait an opponent match
         while (this.game.state.status === GAME_STATUS_INITIALIZING) {
-            this.game = await this.check(CKEY);
+            this.game = await this.check(this.CKey);
         }
 
         // play the game
@@ -44,9 +45,9 @@ export default class CBot {
                 let x = this.game.operators.bearer.possible_moves[randomMove].x;
                 let y = this.game.operators.bearer.possible_moves[randomMove].y;
 
-                this.game = await this.move(CKEY, x, y);
+                this.game = await this.move(this.CKey, x, y);
             } else {
-                this.game = await this.check(CKEY);
+                this.game = await this.check(this.CKey);
             }
         }
 
