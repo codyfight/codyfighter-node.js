@@ -9,6 +9,10 @@ const GAME_STATUS_INIT = 0;
 const GAME_STATUS_PLAYING = 1;
 const GAME_STATUS_TERMINATED = 2;
 
+const TILE_WALL = 0;
+const TILE_BLANK = 1;
+const TILE_EXIT_GATE = 2;
+
 export default class CBot {
 
     constructor(app, CKey) {
@@ -43,9 +47,9 @@ export default class CBot {
         // play the game
         while (this.game.state.status === GAME_STATUS_PLAYING) {
             if (this.game.operators.bearer.is_action_required) {
-                let movement = this.determineMove(); // TODO: implement determineMove() function
-                this.game = await this.move(this.CKey, movement.x, movement.y);
-                console.log('>> codyfighter moved', movement.x, movement.y, this.game.state);
+                let bestMove = this.determineMove(); // TODO: implement determineMove() function to ignite your bot intelligence
+                this.game = await this.move(this.CKey, bestMove.x, bestMove.y);
+                console.log('>> codyfighter moved', bestMove.x, bestMove.y, this.game.state);
             } else {
                 this.game = await this.check(this.CKey);
                 console.log('++ game state received', this.game.state);
@@ -60,12 +64,45 @@ export default class CBot {
 
     // TODO: implement your advanced algorithm to determine the best movement based on the game state (this.game)
     determineMove = () => {
-        let randomMove = Math.floor(Math.random() * this.game.operators.bearer.possible_moves.length);
+        const randomMove = Math.floor(Math.random() * this.game.operators.bearer.possible_moves.length);
+        let bestMove = this.game.operators.bearer.possible_moves[randomMove];
 
-        let x = this.game.operators.bearer.possible_moves[randomMove].x;
-        let y = this.game.operators.bearer.possible_moves[randomMove].y;
+        const exits = this.findExists();
 
-        return { x, y };
+        let shortestDistance = Infinity;
+        for (const exit of exits) {
+            for (const possibleMove of this.game.operators.bearer.possible_moves) {
+                const distanceToExit = this.distance(possibleMove.x, possibleMove.y, exit.x, exit.y);
+                if (distanceToExit < shortestDistance) {
+                    shortestDistance = distanceToExit;
+                    bestMove = possibleMove;
+                }
+            }
+        }
+
+        // TODO: add more logic to determine the bestMove!
+        // ... cage Mr. Ryo?
+        return bestMove;
+    };
+
+    findExists = () => {
+        const exits = [];
+        for (let y in this.game.map) {
+            for (let x in this.game.map[y]) {
+                if (this.game.map[y][x] === TILE_EXIT_GATE) {
+                    exits.push({x, y});
+                }
+            }
+        }
+
+        return exits;
+    };
+
+    distance = (x1, y1, x2, y2) => {
+        const a = x1 - x2;
+        const b = y1 - y2;
+
+        return Math.sqrt(a * a + b * b);
     };
 
     // TODO: migrate to node.js client package
