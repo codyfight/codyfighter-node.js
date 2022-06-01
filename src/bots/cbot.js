@@ -44,7 +44,7 @@ export default class CBot {
         // play the game
         while (this.game.state.status === GAME_STATUS_PLAYING) {
             if (this.game.operators.bearer.is_action_required) {
-                let bestMove = this.determineMove(); // TODO: implement determineMove() function to ignite your bot intelligence
+                const bestMove = this.determineMove(); // TODO: implement determineMove() function to ignite your bot intelligence
                 this.game = await this.move(this.CKey, bestMove.x, bestMove.y);
                 console.log('>> codyfighter moved', bestMove.x, bestMove.y, this.game.state);
             } else {
@@ -61,13 +61,12 @@ export default class CBot {
 
     // TODO: implement your advanced algorithm to determine the best movement based on the game state (this.game)
     determineMove = () => {
-        const randomMove = Math.floor(Math.random() * this.game.operators.bearer.possible_moves.length);
-        let bestMove = this.game.operators.bearer.possible_moves[randomMove];
-
-        const exits = this.findExists();
+        let bestMove = this.game.operators.bearer.possible_moves[
+            Math.floor(Math.random() * this.game.operators.bearer.possible_moves.length) // pick any random possible move
+        ];
 
         let shortestDistance = Infinity;
-        for (const exit of exits) {
+        for (const exit of this.findExits()) {
             for (const possibleMove of this.game.operators.bearer.possible_moves) {
                 const distanceToExit = this.distance(possibleMove.x, possibleMove.y, exit.x, exit.y);
                 if (distanceToExit < shortestDistance) {
@@ -82,7 +81,7 @@ export default class CBot {
         return bestMove;
     };
 
-    findExists = () => {
+    findExits = () => {
         const exits = [];
         for (let y in this.game.map) {
             for (let x in this.game.map[y]) {
