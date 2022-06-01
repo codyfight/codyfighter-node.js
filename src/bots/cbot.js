@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// game settings
+// TODO: game settings to .env
 const GAME_MODE = 2; // 1: custom player; 2 random player; 3 competitive arena
 const API_URL = 'https://game.codyfight.com';
 
