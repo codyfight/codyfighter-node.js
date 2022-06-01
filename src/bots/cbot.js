@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-// TODO: migrate game settings to .env
-const GAME_MODE = 2; // 1: custom player; 2 random player; 3 competitive arena
-const API_URL = 'https://game.codyfight.com';
-
 // TODO: migrate default constants to game client
 const GAME_STATUS_INIT = 0;
 const GAME_STATUS_PLAYING = 1;
@@ -15,10 +11,11 @@ const TILE_EXIT_GATE = 2;
 
 export default class CBot {
 
-    constructor(app, CKey) {
+    constructor(app, CKey, mode) {
         this.game = {};
         this.app = app;
         this.CKey = CKey;
+        this.mode = mode;
     };
 
     run = async () => {
@@ -35,7 +32,7 @@ export default class CBot {
 
     play = async () => {
         // initialize a new game
-        this.game = await this.init(this.CKey, GAME_MODE, null);
+        this.game = await this.init(this.CKey, this.mode, null);
         console.log('^^ game initialized', this.game.state);
 
         // wait for an opponent to match
@@ -120,7 +117,7 @@ export default class CBot {
     
     request = async (method, params) => {
         let config = {
-            url: API_URL + '?ckey=' + params.ckey,
+            url: this.app.config.api.url + '?ckey=' + params.ckey,
             method: method,
             headers: { 'Content-Type': 'application/json' },
         };

@@ -5,11 +5,16 @@ export default function config(app) {
     dotenv.config();
 
     app.config = {
-        env: process.env.ENV,
         port: process.env.PORT,
         api: {
-            codyfight: {
-                ckey: process.env.CKEY,
+            url: process.env.API_URL,
+            codyfighter_0: {
+                ckey: process.env.CKEY_0,
+                mode: process.env.GAME_MODE_0,
+            },
+            codyfighter_1: {
+                ckey: process.env.CKEY_1,
+                mode: process.env.GAME_MODE_1,
             },
         },
     };
