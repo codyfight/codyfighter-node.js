@@ -9,22 +9,21 @@ const TILE_WALL = 0;
 const TILE_BLANK = 1;
 const TILE_EXIT_GATE = 2;
 
-export default class CBot {
+export default class BaseCBot {
 
-    constructor(app, CKey, mode) {
+    constructor(CKey, mode) {
         this.game = {};
-        this.app = app;
         this.CKey = CKey;
         this.mode = mode;
     };
 
-    run = async () => {
+    run = async (name) => {
         do {
             try {
-                console.log('*** laucnhing the game...');
+                console.log(`*** laucnhing the ${ name } game...`);
                 await this.play();
             } catch (e) {
-                console.error(`### game failure ###\n*** re-laucnhing the game...`, e);
+                console.error(`### game failure ###\n*** re-laucnhing the ${ name } game...`, e);
                 await this.run();
             }
         } while (true);
