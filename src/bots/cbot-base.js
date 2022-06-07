@@ -17,13 +17,13 @@ export default class BaseCBot {
         this.mode = mode;
     };
 
-    run = async (name) => {
+    run = async () => {
         do {
             try {
-                console.log(`*** laucnhing the ${ name } game...`);
+                console.log(`*** laucnhing the game for ${ this.constructor.name }...`);
                 await this.play();
             } catch (e) {
-                console.error(`### game failure ###\n*** re-laucnhing the ${ name } game...`, e);
+                console.error(`### game failure ###\n*** re-laucnhing the game for ${ this.constructor.name }...`, e);
                 await this.run();
             }
         } while (true);
