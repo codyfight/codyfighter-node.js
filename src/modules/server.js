@@ -13,6 +13,7 @@ export default function server(app) {
         const CBot_0 = new CBot00(app, app.config.api.codyfighter_0.ckey, app.config.api.codyfighter_0.mode);
         CBot_0.run();
 
+        // TODO: enable the following lines for bot farm scaling
         // const CBot_1 = new CBot01(app, app.config.api.codyfighter_1.ckey, app.config.api.codyfighter_1.mode);
         // CBot_1.run();
     });
