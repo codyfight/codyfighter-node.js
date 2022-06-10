@@ -1,6 +1,6 @@
 import http from 'http';
-import ArenaCBot from '../bots/cbot-arena.js';
-import RandomCBot from '../bots/cbot-random.js';
+import CBot01 from '../bots/cbot-01.js';
+import CBot00 from '../bots/cbot-00.js';
 
 export default function server(app) {
     app.server = http.createServer(app);
@@ -10,10 +10,10 @@ export default function server(app) {
 
         /** invoke Codyfighther(s) */
 
-        const CBot_0 = new RandomCBot(app, app.config.api.codyfighter_0.ckey, app.config.api.codyfighter_0.mode);
+        const CBot_0 = new CBot00(app, app.config.api.codyfighter_0.ckey, app.config.api.codyfighter_0.mode);
         CBot_0.run();
 
-        const CBot_1 = new ArenaCBot(app, app.config.api.codyfighter_1.ckey, app.config.api.codyfighter_1.mode);
-        CBot_1.run();
+        // const CBot_1 = new CBot01(app, app.config.api.codyfighter_1.ckey, app.config.api.codyfighter_1.mode);
+        // CBot_1.run();
     });
 };

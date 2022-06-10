@@ -24,7 +24,6 @@ export default class BaseCBot {
                 await this.play();
             } catch (e) {
                 console.error(`### game failure ###\n*** re-laucnhing the game for ${ this.constructor.name }...`, e);
-                await this.run();
             }
         } while (true);
     };
