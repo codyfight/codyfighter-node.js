@@ -1,6 +1,6 @@
 import http from 'http';
-import CBot01 from '../bots/cbot-01.js';
 import CBot00 from '../bots/cbot-00.js';
+import CBot01 from '../bots/cbot-01.js';
 
 export default function server(app) {
     app.server = http.createServer(app);

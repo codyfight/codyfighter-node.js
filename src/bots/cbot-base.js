@@ -63,19 +63,29 @@ export default class BaseCBot {
             Math.floor(Math.random() * this.game.operators.bearer.possible_moves.length) // pick any random possible move
         ];
 
-        let shortestDistance = Infinity;
         for (const exit of this.findExits()) {
-            for (const possibleMove of this.game.operators.bearer.possible_moves) {
-                const distanceToExit = this.distance(possibleMove.x, possibleMove.y, exit.x, exit.y);
-                if (distanceToExit < shortestDistance) {
-                    shortestDistance = distanceToExit;
-                    bestMove = possibleMove;
-                }
+            const moveTowardsExit = this.getMoveTowards(exit);
+            if (moveTowardsExit !== null) {
+                bestMove = moveTowardsExit;
             }
         }
 
-        // TODO: add more logic to determine the bestMove!
-        // ... cage Mr. Ryo?
+        // TODO: add more logic to determine the bestMove! e.g. cage Mr. Ryo? avoid the Ripper?
+        return bestMove;
+    };
+
+    getMoveTowards = (position) => {
+        let bestMove = null;
+        let shortestDistance = Infinity;
+
+        for (const possibleMove of this.game.operators.bearer.possible_moves) {
+            const distanceToExit = this.distance(possibleMove.x, possibleMove.y, position.x, position.y);
+            if (distanceToExit < shortestDistance) {
+                shortestDistance = distanceToExit;
+                bestMove = possibleMove;
+            }
+        }
+
         return bestMove;
     };
 
