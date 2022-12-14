@@ -20,10 +20,10 @@ export default class BaseCBot {
     run = async () => {
         do {
             try {
-                console.log(`*** laucnhing the game for ${ this.constructor.name }...`);
+                console.log(`*** launching the game for ${ this.constructor.name }...`);
                 await this.play();
             } catch (e) {
-                console.error(`### game failure ###\n*** re-laucnhing the game for ${ this.constructor.name }...`, e);
+                console.error(`### game failure ###\n*** re-launching the game for ${ this.constructor.name }...`, e);
             }
         } while (true);
     };
