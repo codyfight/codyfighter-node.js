@@ -36,7 +36,7 @@ export default class BaseCBot {
         // wait for an opponent to match
         while (this.game.state.status === GAME_STATUS_INIT) {
             this.game = await this.check(this.CKey);
-            console.log('++ game state received', this.game.state);
+            console.log('++ game state received', this.game.state.status);
         }
 
         // play the game
@@ -44,10 +44,10 @@ export default class BaseCBot {
             if (this.game.players.bearer.is_action_required) {
                 const bestMove = this.determineMove(); // TODO: implement determineMove() function to ignite your bot intelligence
                 this.game = await this.move(this.CKey, bestMove.x, bestMove.y);
-                console.log('>> codyfighter moved', bestMove.x, bestMove.y, this.game.state);
+                console.log('>> codyfighter moved', bestMove.x, bestMove.y, this.game.state.status);
             } else {
                 this.game = await this.check(this.CKey);
-                console.log('++ game state received', this.game.state);
+                console.log('++ game state received', this.game.state.status);
             }
         }
 
