@@ -41,7 +41,7 @@ export default class BaseCBot {
 
         // play the game
         while (this.game.state.status === GAME_STATUS_PLAYING) {
-            if (this.game.players.bearer.is_action_required) {
+            if (this.game.players.bearer.is_player_turn) {
                 const bestMove = this.determineMove(); // TODO: implement determineMove() function to ignite your bot intelligence
                 this.game = await this.move(this.CKey, bestMove.x, bestMove.y);
                 console.log('>> codyfighter moved', bestMove.x, bestMove.y, this.game.state.status);
