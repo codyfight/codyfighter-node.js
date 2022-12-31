@@ -93,7 +93,7 @@ export default class BaseCBot {
         const exits = [];
         for (let y in this.game.map) {
             for (let x in this.game.map[y]) {
-                if (this.game.map[y][x] === TILE_EXIT_GATE) {
+                if (this.game.map[y][x].type === TILE_EXIT_GATE) {
                     exits.push({x, y});
                 }
             }
