@@ -113,6 +113,10 @@ export default class BaseCBot {
     init = async (CKey, mode, opponent) => {
         return await this.request('POST', { 'ckey': CKey, 'mode': mode, 'opponent': opponent });
     };
+
+    cast = async (CKey, skillId, x, y) => {
+        return await this.request('PATCH', { 'ckey': CKey, 'skill_id': skillId, 'x': x, 'y': y });
+    };
     
     move = async (CKey, x, y) => {
         return await this.request('PUT', { 'ckey': CKey, 'x': x, 'y': y });
