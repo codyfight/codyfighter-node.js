@@ -9,19 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/driule/codyfight-bot.git"
+    "url": "git+https://github.com/codyfight/codyfighter-node.js.git"
   },
-  "author": "Andrius Jaskauskas",
+  "author": "Codyfight",
   "bugs": {
-    "url": "https://github.com/driule/codyfight-bot/issues"
+    "url": "https://github.com/codyfight/codyfighter-node.js/issues"
   },
-  "homepage": "https://github.com/driule/codyfight-bot#readme",
+  "homepage": "https://github.com/codyfight/codyfighter-node.js#readme",
   "dependencies": {
     "express": "^4.18.2"
   },
   "devDependencies": {
     "dotenv": "^16.0.3",
-    "axios": "^1.2.2",
     "codyfight-game-client": "^1.0.4"
   }
 }
