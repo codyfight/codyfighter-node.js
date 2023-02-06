@@ -1,9 +1,7 @@
-import BaseCBot from './cbot-base.js';
+import BaseCBot from "./cbot-base.js";
 
 export default class CBot00 extends BaseCBot {
-
-    constructor(app, CKey, mode) {
-        super(CKey, mode);
-        this.app = app;
-    };
-};
+  constructor(app, url, ckey, mode) {
+    super(app, url, ckey, mode);
+  }
+}
