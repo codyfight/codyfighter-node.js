@@ -6,7 +6,7 @@ const TILE_WALL = 0;
 const TILE_BLANK = 1;
 const TILE_EXIT_GATE = 2;
 
-const DELAY_TIMER = 60 * 1000; // 1 minute
+const DELAY_TIMER = 60 * 1000;
 
 export {
   GAME_STATUS_INIT,
