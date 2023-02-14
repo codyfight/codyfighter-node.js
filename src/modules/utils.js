@@ -8,24 +8,22 @@ export function codyfighterVariables(envs) {
     value,
   }));
 
-  const codyfightersEnvVariables = envVariables.filter(({ key, value }) => {
-    return key.startsWith("CKEY_") || key.startsWith("GAME_MODE_");
-  });
+  const ckeys = envVariables.filter(({ key }) => key.startsWith("CKEY_"));
 
-  const mapCodyfighters = (data) => {
-    const result = [];
+  const gameModes = envVariables.filter(({ key }) =>
+    key.startsWith("GAME_MODE_")
+  );
 
-    for (let i = 0; i < data.length; i += 2) {
-      result.push({
-        ckey: data[i].value,
-        mode: data[i + 1].value,
-      });
-    }
+  const codyfighters = ckeys
+    .map(({ key, value }, i) => {
+      const ckey = value;
+      const mode = gameModes.find(({ key }) => key === `GAME_MODE_${i}`)?.value;
 
-    return result;
-  };
+      return { ckey, mode };
+    })
+    .filter((codyfighter) => codyfighter);
 
-  const codyfighters = mapCodyfighters(codyfightersEnvVariables);
+  console.log("*** codyfighters:", codyfighters);
 
   return codyfighters;
 }
