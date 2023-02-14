@@ -23,7 +23,5 @@ export function codyfighterVariables(envs) {
     })
     .filter((codyfighter) => codyfighter);
 
-  console.log("*** codyfighters:", codyfighters);
-
   return codyfighters;
 }
