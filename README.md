@@ -60,7 +60,7 @@
 
   4. `endGame()` - End the game.
 
-- No game logic is implemented in this class.
+- No bot gameplay logic is implemented in this class.
 
 ### Bot basic helpers
 
