@@ -11,9 +11,10 @@ import {
 import { sleep } from "../modules/utils.js";
 
 export default class BaseCBot {
-  constructor(app, url, ckey, mode) {
+  constructor(app, url, ckey, mode, i) {
     this.app = app;
     this.url = url;
+    this.index = i;
     this.game = {};
     this.ckey = ckey;
     this.mode = mode;
@@ -23,16 +24,17 @@ export default class BaseCBot {
   async run() {
     while (true) {
       try {
-        console.log(`*** Launching the game for ${this.constructor.name}...`);
+        console.log(
+          `*** Launching the game for ${this.constructor.name}_${this.index}`
+        );
         await this.play();
       } catch (e) {
         console.error(`### Game failure ###`);
 
-        if (e instanceof CustomError) console.error(`Error: ${e.message}`);
-        else console.error(`Unexpected error: ${e.stack}`);
+        console.error(`Error: ${e.message}`);
 
         console.error(
-          `*** Re-launching the game for ${this.constructor.name}...`
+          `*** Re-launching the game for ${this.constructor.name}_${this.index}`
         );
 
         await sleep(DELAY_TIMER);

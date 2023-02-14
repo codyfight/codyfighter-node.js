@@ -1,5 +1,5 @@
 import http from "http";
-import CBot00 from "../bots/cbot-00.js";
+import CBot from "../bots/cbot.js";
 
 export default function server(app) {
   app.server = http.createServer(app);
@@ -7,13 +7,18 @@ export default function server(app) {
   app.listen(app.config.port, () => {
     console.log("Codyfight bots running on port " + app.config.port);
 
-    const CBot_0 = new CBot00(
-      app,
-      app.config.api.url,
-      app.config.api.codyfighter_0.ckey,
-      app.config.api.codyfighter_0.mode
-    );
+    const codyfighters = app.config.api.codyfighters;
 
-    CBot_0.run();
+    codyfighters.forEach((codyfighter, i) => {
+      const bot = new CBot(
+        app,
+        app.config.api.url,
+        codyfighter.ckey,
+        codyfighter.mode,
+        i
+      );
+
+      bot.run();
+    });
   });
 }

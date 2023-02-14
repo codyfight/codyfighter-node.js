@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 
+import { codyfighterVariables } from "./utils.js";
+
 export default function config(app) {
   dotenv.config();
 
@@ -7,10 +9,7 @@ export default function config(app) {
     port: process.env.PORT,
     api: {
       url: process.env.API_URL,
-      codyfighter_0: {
-        ckey: process.env.CKEY_0,
-        mode: process.env.GAME_MODE_0,
-      },
+      codyfighters: codyfighterVariables(process.env),
     },
   };
 }
