@@ -11,7 +11,7 @@ import { sleep } from "../../modules/utils.js";
 // Base Codyfighter bot Class for basic game flow configuration, initialization, and termination.
 // No bot game algorithm is implemented in this class.
 
-export default class BaseCBot {
+export default class CBotConfig {
   constructor(app, url, ckey, mode, i) {
     this.app = app;
     this.url = url;

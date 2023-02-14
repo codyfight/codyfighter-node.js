@@ -46,9 +46,9 @@
 
 ### Bot game flow
 
-- In order to change the default bot game flow you can modify the `BaseCBot` class at `src/bots/modules/BaseCBot.js`.
+- In order to change the default bot game flow you can modify the `CBotConfig` class at `src/bots/modules/CBotConfig.js`.
 
-- The `BaseCBot` class contains basic game flow configuration, initialization, and termination.
+- The `CBotConfig` class contains basic game flow configuration, initialization, and termination.
 
 - The default recursive game flow is as follows:
 

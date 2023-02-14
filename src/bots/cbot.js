@@ -1,4 +1,4 @@
-import BaseCBot from "./modules/BaseCBot.js";
+import CBotConfig from "./modules/CBotConfig.js";
 import GameLib from "./modules/GameLib.js";
 import { sleep } from "../modules/utils.js";
 import { GAME_STATUS_PLAYING } from "../modules/game-constants.js";
@@ -6,7 +6,7 @@ import { GAME_STATUS_PLAYING } from "../modules/game-constants.js";
 // CBot class is the main class for the bot.
 // The bot game algorithm is implemented in the playGame() method.
 
-export default class CBot extends BaseCBot {
+export default class CBot extends CBotConfig {
   constructor(app, url, ckey, mode, i) {
     super(app, url, ckey, mode, i);
     this.gameLib = new GameLib();
