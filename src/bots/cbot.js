@@ -4,8 +4,7 @@ import { sleep } from "../modules/utils.js";
 import { GAME_STATUS_PLAYING } from "../modules/game-constants.js";
 
 // CBot class is the main class for the bot.
-// It extends the BaseCBot class and implements the game logic.
-// The game logic is implemented in the playGame() method.
+// The bot game algorithm is implemented in the playGame() method.
 
 export default class CBot extends BaseCBot {
   constructor(app, url, ckey, mode, i) {
