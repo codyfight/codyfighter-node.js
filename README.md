@@ -29,3 +29,48 @@
    > e.g. [Heroku](https://www.heroku.com/)
 
 7. Scale Codyfighters farm!
+
+---
+
+## Documentation
+
+### Bot behavior
+
+- Create your algorithm by modifying the `CBot` class at `src/bots/CBot.js`.
+
+- The `CBot` class contains the basic logic for your bot.
+
+- The game logic is implemented in the `playGame()` method.
+
+- The `playGame()` method is called every time a new game starts.
+
+### Bot game flow
+
+- In order to change the default bot game flow you can modify the `BaseCBot` class at `src/bots/modules/BaseCBot.js`.
+
+- The `BaseCBot` class contains basic game flow configuration, initialization, and termination.
+
+- The default recursive game flow is as follows:
+
+  1. `initGame()` - Initialize the game.
+
+  2. `waitForOpponent()` - Wait for the opponent to join the game.
+
+  3. `playGame()` - Default entry point for custom bot algorithm in `CBot` class at `src/bots/CBot.js`.
+
+  4. `endGame()` - End the game.
+
+- No game logic is implemented in this class.
+
+### Bot basic helpers
+
+- In order to change or upgrade the default bot basic helpers you can modify the `GameLib` class at `src/bots/modules/GameLib.js`.
+
+- This class contains all the basic game logic that can be reused by all bots.
+
+- Also contains some helper functions that can be used by the bots.
+
+### Game API
+
+- Game API is a external package that provides all game HTTP requests.
+- Documentation can be found at [https://github.com/codyfight/codyfight-game-client#readme](https://github.com/codyfight/codyfight-game-client#readme).
