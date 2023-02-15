@@ -1,9 +1,9 @@
 import { TILE_EXIT_GATE } from "../../modules/game-constants.js";
 
-// GameLib class contains all the basic game logic that can be reused by all bots.
+// GameUtils class contains all the basic game logic that can be reused by all bots.
 // Also contains some helper functions that can be used by the bots.
 
-export default class GameLib {
+export default class GameUtils {
   distance(x1, y1, x2, y2) {
     const a = x1 - x2;
     const b = y1 - y2;
@@ -21,14 +21,29 @@ export default class GameLib {
     }, []);
   }
 
+  findTileByPosition(x, y, game) {
+    return game.map[y][x];
+  }
+
   findSpecialAgent(type, game) {
     return game.special_agents.find((agent) => agent.type === type) || null;
   }
 
   isStaying(move, game) {
     return (
-      move.x === game.players.bearer.possible_moves[0].x &&
-      move.y === game.players.bearer.possible_moves[0].y
+      move?.x === game.players.bearer.possible_moves[0]?.x &&
+      move?.y === game.players.bearer.possible_moves[0]?.y
+    );
+  }
+
+  isNearby(position, specialAgentPosition, distance = 1) {
+    return (
+      this.distance(
+        position?.x,
+        position?.y,
+        specialAgentPosition?.x,
+        specialAgentPosition?.y
+      ) <= distance
     );
   }
 
@@ -43,26 +58,29 @@ export default class GameLib {
     return targets[randomIndex];
   }
 
-  getShortestDistanceMove(positions, currentBestMove, game) {
-    let shortestDistance = Infinity;
+  getShortestDistanceMove(targets, game) {
+    let distances = [];
 
-    for (const position of positions) {
+    for (const position of targets) {
       for (const possibleMove of game.players.bearer.possible_moves) {
         const distance = this.distance(
-          possibleMove.x,
-          possibleMove.y,
-          position.x,
-          position.y
+          possibleMove?.x,
+          possibleMove?.y,
+          position?.x,
+          position?.y
         );
 
-        if (distance < shortestDistance) {
-          shortestDistance = distance;
-          currentBestMove = possibleMove;
-        }
+        distances.push({ move: possibleMove, distance });
       }
     }
 
-    return currentBestMove;
+    distances.sort((a, b) => a.distance - b.distance);
+
+    if (this.isStaying(distances[0].move, game)) {
+      return this.getRandomMove(game);
+    }
+
+    return distances[0].move;
   }
 
   getFarthestDistanceMove(position, currentBestMove, game) {
@@ -70,10 +88,10 @@ export default class GameLib {
 
     for (const possibleMove of game.players.bearer.possible_moves) {
       const distance = this.distance(
-        possibleMove.x,
-        possibleMove.y,
-        position.x,
-        position.y
+        possibleMove?.x,
+        possibleMove?.y,
+        position?.x,
+        position?.y
       );
 
       if (distance > longestDistance) {

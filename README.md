@@ -64,7 +64,7 @@
 
 ### Bot basic helpers
 
-- In order to change or upgrade the default bot basic helpers you can modify the `GameLib` class at `src/bots/modules/GameLib.js`.
+- In order to change or upgrade the default bot basic helpers you can modify the `GameUtils` class at `src/bots/modules/GameUtils.js`.
 
 - This class contains all the basic game logic that can be reused by all bots.
 

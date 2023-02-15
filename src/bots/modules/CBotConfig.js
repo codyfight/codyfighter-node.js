@@ -60,8 +60,12 @@ export default class CBotConfig {
   async initGame() {
     this.game = await this.gameAPI.init(this.ckey, this.mode, null);
 
+    const dashboardUrl = this.url.replace("game.", "").replace("game-", "");
+
     console.log(
-      `^^ ${this.url} ${this.game.players.bearer.name} game initialized`,
+      `^^ ${this.url} ${this.game.players.bearer.name} game initialized.
+Spectate your bot at ${dashboardUrl}play/?spectate=${this.game.players.bearer.name}
+`,
       this.game.state
     );
   }
