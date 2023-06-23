@@ -37,7 +37,15 @@ export default class CBot extends CBotConfig {
 
   async castRandomSkills() {
     for (const skill of this.game.players.bearer.skills) {
-      if (skill.status !== 1 || skill.possible_targets.length === 0) continue;
+      const hasEnoughEnergy =
+        skill.cost <= this.game.players.bearer.stats.energy;
+
+      if (
+        skill.status !== 1 ||
+        skill.possible_targets.length === 0 ||
+        !hasEnoughEnergy
+      )
+        continue;
 
       const target = this.gameUtils.getRandomTarget(skill.possible_targets);
 
