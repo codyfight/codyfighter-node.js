@@ -15,11 +15,14 @@ export default class CBot extends CBotConfig {
 
   // Main game loop
   async playGame() {
+    if (!this.game) return await this.run();
+
     while (this.game.state.status === GAME_STATUS_PLAYING) {
       if (this.game.players.bearer.is_player_turn) {
-        // Develop your own bot algorithm!
-        await this.castRandomSkills();
-        await this.makeRandomMove();
+        // --- Develop your own bot algorithm!
+        await this.castSkills();
+        await this.makeMove();
+        // ---
       } else {
         await sleep(1000);
         this.game = await this.gameAPI.check(this.ckey);
@@ -27,7 +30,7 @@ export default class CBot extends CBotConfig {
     }
   }
 
-  async makeRandomMove() {
+  async makeMove() {
     const move = this.gameUtils.getRandomMove(this.game);
 
     if (this.game.players.bearer.is_player_turn) {
@@ -35,7 +38,11 @@ export default class CBot extends CBotConfig {
     }
   }
 
-  async castRandomSkills() {
+  async castSkills() {
+    if (!this.game?.players?.bearer?.is_player_turn) {
+      return;
+    }
+
     for (const skill of this.game.players.bearer.skills) {
       const hasEnoughEnergy =
         skill.cost <= this.game.players.bearer.stats.energy;
@@ -55,6 +62,9 @@ export default class CBot extends CBotConfig {
         target?.x,
         target?.y
       );
+
+      await this.castSkills();
+      break;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { TILE_EXIT_GATE } from "../../modules/game-constants.js";
+import { TILE_EXIT_GATE, TILE_PIT } from "../../modules/game-constants.js";
 
 // GameUtils class contains all the basic game logic that can be reused by all bots.
 // Also contains some helper functions that can be used by the bots.
@@ -18,6 +18,16 @@ export default class GameUtils {
       });
 
       return exits;
+    }, []);
+  }
+
+  findPits(game) {
+    return game.map.reduce((pits, row, y) => {
+      row.forEach((tile, x) => {
+        if (tile.type === TILE_PIT) pits.push({ x, y });
+      });
+
+      return pits;
     }, []);
   }
 
@@ -47,8 +57,69 @@ export default class GameUtils {
     );
   }
 
+  isCloser(currentPosition, targetA, targetB) {
+    return (
+      this.distance(
+        currentPosition?.x,
+        currentPosition?.y,
+        targetA?.x,
+        targetA?.y
+      ) <
+      this.distance(
+        currentPosition?.x,
+        currentPosition?.y,
+        targetB?.x,
+        targetB?.y
+      )
+    );
+  }
+
+  getClosestExit(game) {
+    const exits = this.findExits(game);
+    let distances = [];
+
+    for (const exit of exits) {
+      const distance = this.distance(
+        game?.players?.bearer?.position?.x,
+        game?.players?.bearer?.position?.y,
+        exit?.x,
+        exit?.y
+      );
+
+      distances.push({ exit, distance });
+    }
+
+    distances.sort((a, b) => a.distance - b.distance);
+
+    return distances[0]?.exit || null;
+  }
+
+  getTargetPosition(possibleTargets, target, towards = true) {
+    let distances = [];
+
+    for (const position of possibleTargets) {
+      const distance = this.distance(
+        position?.x,
+        position?.y,
+        target?.x,
+        target?.y
+      );
+
+      distances.push({ position, distance });
+
+      if (towards) distances.sort((a, b) => a.distance - b.distance);
+      else distances.sort((a, b) => b.distance - a.distance);
+    }
+
+    return distances[0]?.position || null;
+  }
+
   getRandomMove(game) {
-    return game.players.bearer.possible_moves[
+    const possibleMoves = game.players.bearer.possible_moves.filter(
+      (move) => move.type !== TILE_PIT
+    );
+
+    return possibleMoves[
       Math.floor(Math.random() * game.players.bearer.possible_moves.length)
     ];
   }
@@ -61,8 +132,24 @@ export default class GameUtils {
   getShortestDistanceMove(targets, game) {
     let distances = [];
 
+    const pits = this.findPits(game);
+
+    const possibleMoves = game.players.bearer.possible_moves.filter(
+      (position) => {
+        if (position?.direction === "stay") return true;
+
+        for (const pit of pits) {
+          if (position?.x === pit?.x && position?.y === pit?.y) {
+            return false;
+          }
+        }
+
+        return true;
+      }
+    );
+
     for (const position of targets) {
-      for (const possibleMove of game.players.bearer.possible_moves) {
+      for (const possibleMove of possibleMoves) {
         const distance = this.distance(
           possibleMove?.x,
           possibleMove?.y,
@@ -76,17 +163,34 @@ export default class GameUtils {
 
     distances.sort((a, b) => a.distance - b.distance);
 
-    if (this.isStaying(distances[0].move, game)) {
+    if (this.isStaying(distances[0]?.move, game)) {
       return this.getRandomMove(game);
     }
 
-    return distances[0].move;
+    return distances[0]?.move;
   }
 
-  getFarthestDistanceMove(position, currentBestMove, game) {
+  getFarthestDistanceMove(position, game) {
     let longestDistance = 0;
+    let move;
 
-    for (const possibleMove of game.players.bearer.possible_moves) {
+    const pits = this.findPits(game);
+
+    const possibleMoves = game.players.bearer.possible_moves.filter(
+      (position) => {
+        if (position?.direction === "stay") return true;
+
+        for (const pit of pits) {
+          if (position?.x === pit?.x && position?.y === pit?.y) {
+            return false;
+          }
+        }
+
+        return true;
+      }
+    );
+
+    for (const possibleMove of possibleMoves) {
       const distance = this.distance(
         possibleMove?.x,
         possibleMove?.y,
@@ -96,10 +200,10 @@ export default class GameUtils {
 
       if (distance > longestDistance) {
         longestDistance = distance;
-        currentBestMove = possibleMove;
+        move = possibleMove;
       }
     }
 
-    return currentBestMove;
+    return move;
   }
 }
