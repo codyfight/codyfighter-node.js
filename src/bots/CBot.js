@@ -20,7 +20,11 @@ export default class CBot extends CBotConfig {
     while (this.game.state.status === GAME_STATUS_PLAYING) {
       if (this.game.players.bearer.is_player_turn) {
         // --- Develop your own bot algorithm!
+
+        // First, cast skills if possible
         await this.castSkills();
+
+        // Then, make a move to end your turn
         await this.makeMove();
         // ---
       } else {
@@ -30,6 +34,7 @@ export default class CBot extends CBotConfig {
     }
   }
 
+  // Basic random movement, develop your own movement algorithm!
   async makeMove() {
     const move = this.gameUtils.getRandomMove(this.game);
 
@@ -38,6 +43,7 @@ export default class CBot extends CBotConfig {
     }
   }
 
+  // Basic random skill casting, develop your own skill casting algorithm!
   async castSkills() {
     if (!this.game?.players?.bearer?.is_player_turn) {
       return;
