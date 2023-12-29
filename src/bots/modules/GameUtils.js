@@ -1,4 +1,4 @@
-import { TILE_EXIT_GATE, TILE_PIT } from "../../modules/game-constants.js";
+import { TILE_EXIT, TILE_DEATH_PIT } from "../../modules/game-constants.js";
 
 // GameUtils class contains all the basic game logic that can be reused by all bots.
 // Also contains some helper functions that can be used by the bots.
@@ -14,7 +14,7 @@ export default class GameUtils {
   findExits(game) {
     return game.map.reduce((exits, row, y) => {
       row.forEach((tile, x) => {
-        if (tile.type === TILE_EXIT_GATE) exits.push({ x, y });
+        if (tile.type === TILE_EXIT) exits.push({ x, y });
       });
 
       return exits;
@@ -24,7 +24,7 @@ export default class GameUtils {
   findPits(game) {
     return game.map.reduce((pits, row, y) => {
       row.forEach((tile, x) => {
-        if (tile.type === TILE_PIT) pits.push({ x, y });
+        if (tile.type === TILE_DEATH_PIT) pits.push({ x, y });
       });
 
       return pits;
@@ -116,7 +116,7 @@ export default class GameUtils {
 
   getRandomMove(game) {
     const possibleMoves = game.players.bearer.possible_moves.filter(
-      (move) => move.type !== TILE_PIT
+      (move) => move.type !== TILE_DEATH_PIT
     );
 
     return possibleMoves[
