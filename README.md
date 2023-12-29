@@ -24,11 +24,11 @@
 
 5. Develop your advanced algorithm and play against others online!
 
-   > Read [API documentation](https://codyfight.com/api-doc)
+   > _Read [API documentation](https://codyfight.com/api-doc)_
 
-   > Check for open source codes at Discord channel [discord.gg/codyfight](discord.gg/codyfight)
-   
-   > Look for Github repos, like this one, to get inspiration: [https://github.com/Vinimart/codyfight-hunter-bot-js](https://github.com/Vinimart/codyfight-hunter-bot-js)
+   > _Check for open source codes at Discord channel [discord.gg/codyfight](discord.gg/codyfight)_
+
+   > _Look for Github repos, like this one, to get inspiration: [https://github.com/Vinimart/codyfight-hunter-bot-js](https://github.com/Vinimart/codyfight-hunter-bot-js)_
 
 6. Deploy an instance on a local computer or any server you like
 
