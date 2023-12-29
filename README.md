@@ -1,6 +1,6 @@
 # Node.js Codyfighter
 
-#### [Codyfight website](https://codyfight.com) | [Discord](discord.gg/codyfight) | [API docs](https://codyfight.com/api-doc) | [Community repo](https://github.com/Vinimart/codyfight-hunter-bot-js)
+#### [Codyfight website](https://codyfight.com) | [Discord](https://discord.gg/codyfight) | [API docs](https://codyfight.com/api-doc) | [Community repo](https://github.com/Vinimart/codyfight-hunter-bot-js)
 
 ---
 
@@ -26,7 +26,7 @@
 
    > _Read [API documentation](https://codyfight.com/api-doc)_
 
-   > _Check for open source codes at Discord channel [discord.gg/codyfight](discord.gg/codyfight)_
+   > _Check for open source codes at Discord channel [discord.gg/codyfight](https://discord.gg/codyfight)_
 
    > _Look for Github repos, like this one, to get inspiration: [https://github.com/Vinimart/codyfight-hunter-bot-js](https://github.com/Vinimart/codyfight-hunter-bot-js)_
 
