@@ -12,7 +12,7 @@
 
 2. Fork or clone this repository
 
-   > `git@github.com:codyfight/codyfighter-node.js.git`
+   > `git clone git@github.com:codyfight/codyfighter-node.js.git`
 
 3. Setup your Operator CKey(s) by creating a `.env` file using our `.env.template`.
 
