@@ -1,6 +1,6 @@
 {
   "name": "codyfight-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Codyfight Bot",
   "main": "src/index.js",
   "type": "module",
@@ -19,7 +19,7 @@
   "dependencies": {
     "axios": "^1.3.2",
     "chalk": "^5.2.0",
-    "codyfight-game-client": "^1.0.x",
+    "codyfight-game-client": "^1.2.11",
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
   }
